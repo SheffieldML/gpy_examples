@@ -6,6 +6,9 @@ baseurl: "/gpy_examples" # the subpath of your site, e.g. /blog/
 url: "http://sheffieldml.github.io" # the base hostname & protocol for your site
 twitter_username: sheffieldml
 github_username:  sheffieldml
+colab: https://colab.research.google.com
+nbviewer: https://nbviewer.jupyter.org
+
 ghub:
   edit: true
   repository: gpy_examples
