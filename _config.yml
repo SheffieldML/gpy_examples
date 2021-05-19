@@ -10,10 +10,12 @@ ghub:
   edit: true
   repository: gpy_examples
 
-permalink: "/:categories/:title.html"
-
 author:
   name: Neil D. Lawrence
+
+collections:
+  examples:
+    output: true
 
 display:
   copy_button:

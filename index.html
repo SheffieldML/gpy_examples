@@ -12,8 +12,9 @@ title: GPy Examples
   <input type="search" name="filter-titles" id="search-titles" value />
 </div>
 
-{% for post in site.posts  %}
-
+<p>Wow!</p>
+{% for post in site.examples  %}
+<b>Cat</b>
 {% if forloop.first %}
 <h2>Examples}</h2>
 <ul>
@@ -21,6 +22,7 @@ title: GPy Examples
   {% include listpaper.html %}
   {% if forloop.last %}
 </ul>
+{% endif %}
 {% endfor %}  
   
   <p class="rss-subscribe">subscribe <a href="{{ "/assets/rss/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
