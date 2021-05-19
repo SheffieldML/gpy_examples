@@ -12,12 +12,12 @@ title: GPy Examples
   <input type="search" name="filter-titles" id="search-titles" value />
 </div>
 
-{% for post in site.examples  %}
+{% for example in site.examples  %}
 {% if forloop.first %}
 <h2>Examples</h2>
 <ul>
   {% endif %}
-  {% include listpaper.html %}
+  {% include listexample.html %}
   {% if forloop.last %}
 </ul>
 {% endif %}
