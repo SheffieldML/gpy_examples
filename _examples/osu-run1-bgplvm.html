@@ -88,6 +88,10 @@ sns.set_palette('colorblind')}-->
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;info&#39;</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;details&#39;</span>])</span></code></pre></div>
+<h2 id="osu-run-1-motion-capture-data-with-bayesian-gp-lvm">OSU Run 1 Motion Capture Data with Bayesian GP-LVM</h2>
+<div style="text-align:right">
+<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_gplvm/includes/osu-run1-bgplvm.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_gplvm/includes/osu-run1-bgplvm.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
+</div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> GPy</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> GPy.kern.RBF(Q, lengthscale<span class="op">=</span>np.repeat(<span class="fl">.5</span>, Q), ARD<span class="op">=</span><span class="va">True</span>)</span>
@@ -97,8 +101,7 @@ sns.set_palette('colorblind')}-->
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>model.data <span class="op">=</span> data</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>model.likelihood.variance <span class="op">=</span> <span class="fl">0.001</span></span></code></pre></div>
-<h1 id="optimize">optimize</h1>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m.optimize(<span class="st">&#39;bfgs&#39;</span>, messages<span class="op">=</span>verbose, max_iters<span class="op">=</span><span class="fl">5e3</span>, bfgs_factor<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model.optimize(<span class="st">&#39;bfgs&#39;</span>, messages<span class="op">=</span>verbose, max_iters<span class="op">=</span><span class="fl">5e3</span>, bfgs_factor<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure">
 <div id="osu-run1-data-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/gplvm/osu-run1-bgplvm.svg" width="80%" style=" ">
@@ -112,7 +115,4 @@ sns.set_palette('colorblind')}-->
 </div>
 </div>
 <h1 id="references">References</h1>
-<div style="text-align:right">
-<span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/osu-run1-bgplvm.gpp.markdown" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/osu-run1-bgplvm.gpp.markdown', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
-</div>
 
