@@ -1,0 +1,39 @@
+# Site settings
+title: "GPy Examples"
+description: > # this means to ignore newlines until "baseurl:"
+  Example site for using GPy software.
+baseurl: "/gpy_examples" # the subpath of your site, e.g. /blog/
+url: "http://sheffieldml.github.io" # the base hostname & protocol for your site
+twitter_username: sheffieldml
+github_username:  sheffieldml
+ghub:
+  edit: true
+  repository: gpy_examples
+
+permalink: "/:categories/:title.html"
+
+author:
+  name: Neil D. Lawrence
+
+display:
+  copy_button:
+    bibtex: true
+    endnote: true
+    ris: true
+    apa: true
+  comments: true
+
+
+# Build settings
+markdown: kramdown
+#permalink: "/:categories/:title.html"
+permalink: "/:title.html"
+plugins:
+- jekyll-feed
+- jekyll-seo-tag
+- jekyll-remote-theme
+remote_theme: lawrennd/proceedings
+
+analytics:
+  google:
+    tracking_id: UA-62971049-1
