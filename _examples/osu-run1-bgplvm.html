@@ -90,17 +90,19 @@ sns.set_palette('colorblind')}-->
 <div style="text-align:right">
 <span class="editsection-bracket" style="">[</span><span class="editsection" style=""><a href="https://github.com/lawrennd/talks/edit/gh-pages/_gplvm/includes/osu-run1-bgplvm.md" target="_blank" onclick="ga('send', 'event', 'Edit Page', 'Edit', 'https://github.com/lawrennd/talks/edit/gh-pages/_gplvm/includes/osu-run1-bgplvm.md', 13);">edit</a></span><span class="editsection-bracket" style="">]</span>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> GPy.models <span class="im">import</span> BayesianGPLVM</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> GPy.kern.RBF(Q, lengthscale<span class="op">=</span>np.repeat(<span class="fl">.5</span>, Q), ARD<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BayesianGPLVM(data[<span class="st">&#39;Y&#39;</span>], Q,</span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> GPy</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> GPy.models <span class="im">import</span> BayesianGPLVM</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> GPy.kern.RBF(Q, lengthscale<span class="op">=</span>np.repeat(<span class="fl">.5</span>, q), ARD<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BayesianGPLVM(data[<span class="st">&#39;Y&#39;</span>], q,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                      init<span class="op">=</span><span class="st">&quot;PCA&quot;</span>,</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                      num_inducing<span class="op">=</span><span class="dv">20</span>, kernel<span class="op">=</span>kernel)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>model.data <span class="op">=</span> data</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>model.likelihood.variance <span class="op">=</span> <span class="fl">0.001</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model.optimize(<span class="st">&#39;bfgs&#39;</span>, messages<span class="op">=</span>verbose, max_iters<span class="op">=</span><span class="fl">5e3</span>, bfgs_factor<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>model.data <span class="op">=</span> data</span></code></pre></div>
+<p>Variational methods decompose the lower bound on the log likelihood (or ELBO) into a term which represents the expectation of the log likelihood under the approximation posterior and a KL divergence between the <em>prior</em> and the approximate posterior. A common local minimum is to ignore the log likelihood and set the approximate posterior equal to the prior. To avoid this we initialise with low Gaussian noise, which emphasises the expectation of the log likelihood under the posterior. Here it is set to a noise variance of 0.001.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model.likelihood.variance <span class="op">=</span> <span class="fl">0.001</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model.optimize(<span class="st">&#39;bfgs&#39;</span>, messages<span class="op">=</span><span class="va">True</span>, max_iters<span class="op">=</span><span class="fl">5e3</span>, bfgs_factor<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure">
 <div id="osu-run1-data-figure" class="figure-frame">
 <object class="svgplot " data="../slides/diagrams/gplvm/osu-run1-bgplvm.svg" width="80%" style=" ">
@@ -110,7 +112,7 @@ sns.set_palette('colorblind')}-->
 <img class="img-button" src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5ex">
 </div>
 <div id="osu-run1-data-caption" class="caption-frame">
-<p>Figure: Gaussian process latent variable model visualisation of OSU motion capture data set.</p>
+<p>Figure: Bayesian Gaussian process latent variable model visualisation of OSU motion capture data set.</p>
 </div>
 </div>
 <h1 id="references">References</h1>
